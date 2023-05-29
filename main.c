@@ -74,7 +74,7 @@ int main(void) {
         c[i] = getch();
         if (isalnum(c[i]) || ispunct(c[i])) {
             size++;
-            printf("*");
+            printf("\u2022");
         }
         if (!isprint(c[i]) && c[i] != '\b') {
             printf("\nbreak\n");
@@ -84,7 +84,7 @@ int main(void) {
             backspace++;
             printf("\r               \r");
             for (int i = 0; i < size - backspace - 2; i++) {
-                printf("*");
+                printf("\u2022");
             }
             i-=2;
         }
