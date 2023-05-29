@@ -13,3 +13,11 @@ make an algorithm that quantifies randomness in a password
 try bst
 
 try a text file with a lot of words
+
+# Unicode Rendering [POWERSHELL]
+
+```powershell
+$OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding =
+                    New-Object System.Text.UTF8Encoding
+```
+Set text encoding to UTF-8. [Source](https://stackoverflow.com/questions/40098771/changing-powershells-default-output-encoding-to-utf-8)
