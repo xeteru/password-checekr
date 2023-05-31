@@ -6,31 +6,29 @@
 
 #define MAX 25
 
-enum strength{Weak, Ok, Good, Strong};
-
 double rnd(char pass[]) {
     double avg = 0;
     int size = strlen(pass) - 1;
     int diff[size];
     for (int i = 0; i < strlen(pass); i++) {
-        if (isprint(pass[i]) && isprint(pass[i+1])) {
+        if (isgraph(pass[i]) && isprint(pass[i+1])) {
             diff[i] = (abs(pass[i] - pass[i + 1]));
-            printf("%d\n", diff[i]);
         }
     }
 
     for (int i = 0; i < size; i++) {
-        avg = avg + diff[i];
+        avg = avg + diff[i]; 
     }
-    
    return avg = avg / size;
 }
 
 int strengthCheck(char pass[]) {
-    int num;
-    int letter;
-    int special;
-    int str;
+    int num = 0;
+    int letter = 0;
+    int special = 0;
+    int str = 0;
+    int upper = 0 ;
+    int lower = 0;
 
     for (int i = 0; i < strlen(pass); i++) {
         if (isdigit(pass[i])) {
@@ -38,35 +36,50 @@ int strengthCheck(char pass[]) {
         }
         else if (isalpha(pass[i])) {
             letter++;
+            if (isupper(pass[i])) {
+                upper++;
+            }
+            else {
+                lower++;
+            }
         }
         else if (ispunct(pass[i])) {
             special++;
         }
     }
+    
+    printf("%d numbers\n", num);
+    printf("%d letters\n", letter);
+    printf("%d upper\n", upper);
+    printf("%d lower\n", lower);
+    printf("%d special\n", special);
+    printf("It has a variety of: %f\n", rnd(pass));
 
-    if (strlen(pass) < 8 || letter == 0 && special == 0 || num == strlen(pass) || rnd(pass) <= 3) {
-        str = 1;
+    if (strlen(pass) >= 12 && letter >= 2 && lower >= 1 && upper >= 1 && num >= 8 && special >= 2 && num >= 8 && rnd(pass) >= 15) {
+        printf("Strong");
+        return 4;
     }
-    else if (strlen(pass) >= 8 || num == 0 || letter == 0 || special == 0) {
-        str = 2;
+    else if (strlen(pass) >= 10 && letter >= 2 && lower >= 1 && upper >= 1 && num >= 7 && special >= 1 && rnd(pass) >= 10) {
+        printf("Good");
+        return 3;
+    }
+    else if (strlen(pass) >= 8 && letter == 2 && rnd(pass) >= 1) {
+        printf("Ok");
+        return 2;
+    }
+    else {    
+        printf("Weak");
+        return 1;
     }
 }
 
 int main(void) {
-    // printf("Create Your Account\n\nEnter Username: ");
-    // char user[MAX] = "test";
-    // fgets(user, MAX, stdin);
+    printf("//Create Your Account//\n\nEnter Username: ");
 
-    // enum strength str;
-    // do {
-    //     printf("Enter Password: ");
-    //     char pass1[MAX] = "";
-    //     fgets(pass1, MAX, stdin);
+    char user[MAX];
+    scanf("%s", user);
 
-    //     printf("Confirm Password")
-    // } while (str == Weak && );
-    
-    printf("%f", rnd("aaaaaaa\n"));
+    printf("Enter Password: ");
     char c[MAX] = "";
     int size = 2;
     int backspace = 0;
@@ -77,12 +90,10 @@ int main(void) {
             printf("*");
         }
         if (!isprint(c[i]) && c[i] != '\b') {
-            printf("\nbreak\n");
-            break;
         }
         else if (c[i] == '\b') {
             backspace++;
-            printf("\r               \r");
+            printf("\r               \rEnter Password: ");
             for (int i = 0; i < size - backspace - 2; i++) {
                 printf("*");
             }
@@ -99,6 +110,8 @@ int main(void) {
         }
     }
 
-    printf("\n%d", strlen(pass));
+    printf("\nThe size of the password is: %d\n", strlen(pass));
+    strengthCheck(pass);
+
 
 }   
