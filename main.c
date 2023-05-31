@@ -101,7 +101,6 @@ int main(void) {
         }
     }
 
-    printf("%s\n", c);
     char pass[MAX] = "";
     for (int i = 0; i < strlen(c); i++) {
         if (isprint(c[i])) {
