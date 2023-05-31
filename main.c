@@ -80,31 +80,35 @@ int main(void) {
     scanf("%s", user);
 
     printf("Enter Password: ");
-    char c[MAX] = "";
+    char str[MAX] = "";
+    char c;
     int size = 2;
-    int backspace = 0;
-    for (int i = 0; i < size; ++i) {
-        c[i] = getch();
-        if (isalnum(c[i]) || ispunct(c[i])) {
-            size++;
+    for (int i = 0; i < MAX; ++i) {
+        c = getch();
+        if (isalnum(c) || ispunct(c)) {
+            str[i] = c;
             printf("*");
+            size++;
         }
-        if (!isprint(c[i]) && c[i] != '\b') {
+        else if (!isprint(c) && c != '\b') {
+            break;
         }
-        else if (c[i] == '\b') {
-            backspace++;
-            printf("\r               \rEnter Password: ");
-            for (int i = 0; i < size - backspace - 2; i++) {
+        else if (c == '\b' && i != 0) {
+            str[i - 1] = str[i];
+            i -= 2;
+            size--;
+            printf("\r                            \rEnter Password: ");
+            for (int j = 0; j < size - 2; j++) {
                 printf("*");
             }
-            i-=2;
-        }
+        }   
     }
 
     char pass[MAX] = "";
-    for (int i = 0; i < strlen(c); i++) {
-        if (isprint(c[i])) {
-            pass[i] = c[i];
+    puts("");
+    for (int i = 0; i < strlen(str); i++) {
+        if (isprint(str[i])) {
+            pass[i] = str[i];
             printf("%c", pass[i]);
         }
     }
