@@ -13,3 +13,7 @@ make an algorithm that quantifies randomness in a password
 try bst
 
 try a text file with a lot of words
+
+levi method
+
+use similar string matching
